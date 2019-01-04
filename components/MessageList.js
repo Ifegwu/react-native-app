@@ -33,7 +33,7 @@ export default class MessageList extends React.Component {
                     </View>
                 );
             case 'image':
-                return <Image style={styles.image} source={{ uri}} />;
+                return <Image style={styles.image} source={{ uri }} />;
             case 'location':
                 return (
                     <MapView 

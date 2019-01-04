@@ -42,7 +42,7 @@ export default class MessagingContainer extends React.Component {
     renderMessageList = () => {
         const { messages } = this.state;
         return (
-          <View sylte={styles.content}>
+          <View style={styles.content}>
             <MessageList messages={messages} onPressMessage={this.handlePressMessage} />
           </View>
         );
@@ -65,8 +65,8 @@ export default class MessagingContainer extends React.Component {
             <View style={styles.container}>
                 <Status />
                 {this.renderMessageList()}
-                {this.renderToolbar()}
-                {this.renderInputMethodEditor()}
+                {/* {this.renderToolbar()}
+                {this.renderInputMethodEditor()} */}
             </View>
         );
     }
