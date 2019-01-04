@@ -25,16 +25,16 @@ export default class MessagingContainer extends React.Component {
     });
 
     state = {
-        // messages: [
-        //     createImageMessage('https://unsplash.it/300/300'),
-        //     createTextMessage('world'),
-        //     createTextMessage('Hello'),
-        //     createLocationMessage({
-        //         latitude: 37.78825,
-        //         longitude: -122.4324,
-        //     }),
-        // ],
-        messages: store.getState().messages
+        messages: [
+            createImageMessage('https://unsplash.it/300/300'),
+            createTextMessage('world'),
+            createTextMessage('Hello'),
+            createLocationMessage({
+                latitude: 37.78825,
+                longitude: -122.4324,
+            }),
+        ],
+        // messages: store.getState().messages
     };
 
     handlePressMessage = () => {}
