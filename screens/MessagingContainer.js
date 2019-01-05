@@ -36,30 +36,37 @@ export default class MessagingContainer extends React.Component {
             }),
         ],
         // messages: store.getState().messages
+        fullscreenImageId: null,
+    };
+
+    dismissFullscreenImage = () => {
+        this.setState({ fullscreenImageId: null });
     };
 
     handlePressMessage = ({ id, type }) => {
         switch (type) {
             case 'text':
                 
-            Alert.alert(
-                    'Delete message?',
-                    'Are you sure you want to permenently delete this message?',
-                    [
-                        {
-                            text: 'Cancel',
-                            style: 'cancel',
-                        },
-                        {
-                            text: 'Delete',
-                            style: 'destructive',
-                            onPress: () => {
-                                const { messages } = this.state;
-                                this.setState({ messages: messages.filter(messages => message.id !== id)});
+                Alert.alert(
+                        'Delete message?',
+                        'Are you sure you want to permenently delete this message?',
+                        [
+                            {
+                                text: 'Cancel',
+                                style: 'cancel',
                             },
-                        },
-                    ],
-                );
+                            {
+                                text: 'Delete',
+                                style: 'destructive',
+                                onPress: () => {
+                                    const { messages } = this.state;
+                                    this.setState({ messages: messages.filter(messages => message.id !== id)});
+                                },
+                            },
+                        ],
+                    );
+            case 'image':
+                this,this.setState({ fullscreenImageId: id });
                 break;
             default:
                 break;
