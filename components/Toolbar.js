@@ -85,9 +85,9 @@ export default class Toolbar extends React.Component {
         const { text } = this.state;
         return (
             <View style={styles.toolbar}>
-                {/* Uise emojis for icons instead! */}
-                <ToolbarButton title={'C'} onPress={onPressCamera} />
-                <ToolbarButton title={'L'} onPress={onPressCamera} />
+                {/* Use emojis for icons instead! */}
+                <ToolbarButton title={'📷'} onPress={onPressCamera} />
+                <ToolbarButton title={'📍'} onPress={onPressCamera} />
                 <View style={styles.inputContainer}>
                     <TextInput 
                         style={styles.input}
