@@ -1,5 +1,6 @@
-import { StyleSheet, View } from 'react-native';
+import { Alert, FlatList, Image, Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 import React from 'react';
+import { MapView } from 'expo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import colors from '../utils/colors';
 import Status from './Status';
@@ -37,7 +38,33 @@ export default class MessagingContainer extends React.Component {
         // messages: store.getState().messages
     };
 
-    handlePressMessage = () => {}
+    handlePressMessage = ({ id, type }) => {
+        switch (type) {
+            case 'text':
+                
+            Alert.alert(
+                    'Delete message?',
+                    'Are you sure you want to permenently delete this message?',
+                    [
+                        {
+                            text: 'Cancel',
+                            style: 'cancel',
+                        },
+                        {
+                            text: 'Delete',
+                            style: 'destructive',
+                            onPress: () => {
+                                const { messages } = this.state;
+                                this.setState({ messages: messages.filter(messages => message.id !== id)});
+                            },
+                        },
+                    ],
+                );
+                break;
+            default:
+                break;
+        }
+    };
     
     renderMessageList = () => {
         const { messages } = this.state;
@@ -65,8 +92,8 @@ export default class MessagingContainer extends React.Component {
             <View style={styles.container}>
                 <Status />
                 {this.renderMessageList()}
-                {/* {this.renderToolbar()}
-                {this.renderInputMethodEditor()} */}
+                {this.renderToolbar()}
+                {this.renderInputMethodEditor()}
             </View>
         );
     }
