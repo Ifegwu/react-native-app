@@ -7,6 +7,7 @@ import Status from './Status';
 import MessageList from '../components/MessageList';
 import { createImageMessage, createLocationMessage, createTextMessage } from '../utils/MessageUtils';
 import store from '../store';
+import Toolbar from '../components/Toolbar';
 
 export default class MessagingContainer extends React.Component {
     static navigationOptions = ({ navigation: { navigate } }) => ({
@@ -37,6 +38,27 @@ export default class MessagingContainer extends React.Component {
         ],
         // messages: store.getState().messages
         fullscreenImageId: null,
+        isInputFocused: false,
+    };
+
+    handlePressToolbarCamera = () => {
+        //...
+    }
+
+    handlePressToolbarLocation = () => {
+        //...
+    }
+
+    handleChangeFocus = (isFocused) => {
+        this.setState({ isInputFocused: isFocused});
+    };
+
+    handleSubmit = (text) => {
+        const { messages } = this.state;
+
+        this.setState({
+            messages: [createTextMessage(text), ...messages],
+        });
     };
 
     dismissFullscreenImage = () => {
@@ -107,8 +129,18 @@ export default class MessagingContainer extends React.Component {
     }
 
     renderToolbar = () => {
+        const { isInputFocused } = this.state;
+
         return (
-            <View style={styles.toolbar}></View>
+            <View style={styles.toolbar}>
+                <Toolbar 
+                    isFocused={isInputFocused}
+                    onSubmit={this.handleSubmit}
+                    onChangeFocus={this.handleChangeFocus}
+                    onPressCamera={this.handlePressToolbarCamera}
+                    onPressLocation={this.handlePressToolbarLocation}
+                />
+            </View>
         );
     }
 
