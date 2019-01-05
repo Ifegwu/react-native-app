@@ -1,4 +1,4 @@
-import { Alert, FlatList, Image, Text, TouchableOpacity, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, Image, Text, TouchableOpacity, TouchableHighlight, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { MapView } from 'expo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -72,6 +72,24 @@ export default class MessagingContainer extends React.Component {
                 break;
         }
     };
+
+    renderFullscreenImage = () => {
+        const { messages, fullscreenImageId } = this.state;
+
+        if (!fullscreenImageId) return null;
+
+        const image =  messages.find(message => message.id === fullscreenImageId);
+
+        if (!image) return null;
+
+        const { uri } = image;
+
+        return (
+            <TouchableHighlight style={styles.fullscreenOnerlay} onPress={this.dismissFullscreenImage}>
+                <Image style={styles.fullscreenImage} source={{ uri }} />
+            </TouchableHighlight>
+        )
+    }
     
     renderMessageList = () => {
         const { messages } = this.state;
@@ -101,6 +119,7 @@ export default class MessagingContainer extends React.Component {
                 {this.renderMessageList()}
                 {this.renderToolbar()}
                 {this.renderInputMethodEditor()}
+                {this.renderFullscreenImage()}
             </View>
         );
     }
@@ -123,5 +142,14 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: 'rgba(0,0,0,0.04)',
         backgroundColor: 'white',
+    },
+    fullscreenOnerlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'black',
+        zIndex: 2,
+    },
+    fullscreenImage: {
+        flex: 1,
+        resizeMode: 'contain',
     },
 });
